@@ -24,7 +24,7 @@ function objToSql(ob) {
 
 var orm = {
 
-	all: function(tableInput, callback) {
+	selectAll: function(tableInput, callback) {
 		var queryString = "SELECT * FROM " + tableInput + ";";
 		connection.query(queryString, function(err, result) {
 			if (err) {
@@ -34,7 +34,7 @@ var orm = {
 		});
 	},
 
-	create: function (table, cols, vals, callback) {
+	insertOne: function (table, cols, vals, callback) {
 		var queryString = "INSERT INTO " + table;
 
 		queryString += " (";
@@ -54,7 +54,7 @@ var orm = {
 		});
 	},
 
-	update: function (table, objColVals, condition, callback) {
+	updateOne: function (table, objColVals, condition, callback) {
 		var queryString = "UPDATE " + table;
 
 		queryString += " SET ";
@@ -69,20 +69,6 @@ var orm = {
 			}
 
 			callback(result);
-		});
-	},
-
-	delete: function(table, condition, callback) {
-		var queryString = "DELETE FROM " + table;
-		queryString += " WHERE ";
-		queryString += condition;
-
-		connection.query(queryString, function(err, result) {
-			if (err) {
-				throw err;
-			}
-
-			callback(reuslt);
 		});
 	}
 };
